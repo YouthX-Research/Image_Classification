@@ -1,36 +1,30 @@
-# Image Classification: Animals (Cats, Dogs, and Foxes)
+# Image Classification: Cats, Dogs and Foxes
 
-A deep learning project to classify animal images using PyTorch and Keras. This project uses a dataset of Cats, Dogs, and Foxes to train a Convolutional Neural Network (CNN).
+A small convolutional neural network in PyTorch that sorts animal photos into three classes: cat, dog and fox. Written as a learning project.
 
-## 🚀 Features
-- **Dataset Integration**: Automatically downloads the dataset from Kaggle using `kagglehub`.
-- **Model Architecture**: Custom CNN implementation in PyTorch.
-- **Preprocessing**: Robust image preprocessing and augmentation.
-- **Inference**: Prediction script for individual images.
+## Dataset
 
-## 🛠️ Tech Stack
-- **Languages**: Python
-- **Libraries**: 
-  - PyTorch
-  - TensorFlow / Keras (for inference)
-  - Torchvision
-  - Matplotlib
-  - NumPy
+[Animal Image Dataset (Cats, Dogs, and Foxes)](https://www.kaggle.com/datasets/snmahsa/animal-image-dataset-cats-dogs-and-foxes) on Kaggle. The notebook downloads it with `kagglehub`, so you don't need to fetch it by hand.
 
-## 📂 Project Structure
-- `Image_Classification.ipynb`: Main notebook containing data loading, training, and evaluation logic.
-- `animal_classifier.pth`: Trained model weights (generated after training).
+## Running it
 
-## 📊 Dataset
-The project uses the [Animal Image Dataset (Cats, Dogs, and Foxes)](https://www.kaggle.com/datasets/snmahsa/animal-image-dataset-cats-dogs-and-foxes) from Kaggle.
+Open [`Image_Classification.ipynb`](Image_Classification.ipynb) in Google Colab or Jupyter and run the cells from the top. Locally, install the dependencies first:
 
-## 📝 Usage
-1. Open the `.ipynb` file in Google Colab or a local Jupyter environment.
-2. Ensure you have the required dependencies installed:
-   ```bash
-   pip install torch torchvision tensorflow kagglehub matplotlib numpy
-   ```
-3. Run the cells sequentially to download the data and train the model.
+```sh
+pip install torch torchvision kagglehub matplotlib numpy
+```
 
----
-*Created by VastSea0*
+The notebook:
+
+1. Downloads the dataset.
+2. Resizes and normalizes the images and loads them with `ImageFolder`.
+3. Trains the CNN and plots the loss.
+4. Saves the weights to `animal_classifier.pth`. Weights are not committed.
+
+## Known issue
+
+The last cell, which predicts a single image, loads the model with TensorFlow/Keras (`load_model`). That can't read PyTorch weights. Prediction should use `torch.load` and the same transforms as training. A pull request that fixes this is welcome.
+
+## License
+
+[GPL-3.0](LICENSE). Part of [YouthX Research](https://github.com/YouthX-Research).
